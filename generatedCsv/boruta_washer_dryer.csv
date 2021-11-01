@@ -1,0 +1,17 @@
+,Features,Score
+3,Age_Range,1.0
+11,Pants_Colour,0.93
+9,Shirt_Colour,0.86
+7,Basket_colour,0.79
+5,Kids_Category,0.71
+0,Race,0.64
+2,Body_Size,0.64
+8,Attire,0.5
+14,Spectacles,0.43
+15,Age_Group,0.36
+12,pants_type,0.29
+13,Wash_Item,0.21
+10,shirt_type,0.14
+6,Basket_Size,0.07
+1,Gender,0.0
+4,With_Kids,0.0

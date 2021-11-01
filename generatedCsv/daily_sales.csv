@@ -1,0 +1,25 @@
+,Date,counts,day_of_week,Condition
+0,2015-10-19,7,Monday,Haze
+1,2015-10-20,60,Tuesday,Haze
+2,2015-10-21,25,Wednesday,Haze
+3,2015-10-22,20,Thursday,Mostly Cloudy
+4,2015-10-23,34,Friday,Mostly Cloudy
+5,2015-10-24,54,Saturday,Thunder
+6,2015-10-25,6,Sunday,Rain
+7,2015-10-26,5,Monday,Rain Shower
+8,2015-10-29,9,Thursday,Thunder
+9,2015-10-30,1,Friday,Thunder
+10,2015-11-01,4,Sunday,Mostly Cloudy
+11,2015-11-02,36,Monday,Thunder
+12,2015-11-03,41,Tuesday,Thunder
+13,2015-11-04,20,Wednesday,Thunder
+14,2015-11-05,4,Thursday,Thunder
+15,2015-11-15,40,Sunday,Thunder
+16,2015-11-23,29,Monday,Showers in the Vicinity
+17,2015-11-24,18,Tuesday,Showers in the Vicinity
+18,2015-11-25,20,Wednesday,Thunder
+19,2015-11-26,22,Thursday,Mostly Cloudy
+20,2015-11-27,80,Friday,Mostly Cloudy
+21,2015-11-28,120,Saturday,Showers in the Vicinity
+22,2015-11-29,134,Sunday,Thunder
+23,2015-12-09,17,Wednesday,Mostly Cloudy
