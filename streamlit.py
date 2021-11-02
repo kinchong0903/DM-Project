@@ -27,126 +27,21 @@ Lee Jun Yong - 1191302186
 df = pd.read_csv("LaundryData.csv")
 df = df.drop('No', axis = 1)
 df.head()
+option = st.selectbox(
+        "Please choose options:",
+        ("Washer_No", "Dryer_No", "Race", "Basket_Size", "Gender", "Body_Size", "With_Kids", "Age_Range")
+    )
 
-grouped = df.groupby('Washer_No').size().reset_index(name= 'frequency')
+grouped = df.groupby(option).size().reset_index(name= 'frequency')
 
 fig = plt.figure()
 ax = fig.add_axes([0,0,1,1])
-x = grouped['Washer_No'].astype(str)
+x = grouped[option].astype(str)
 y = grouped['frequency']
 ax.bar(x,y)
-plt.xlabel("Washer_No")
+plt.xlabel(option)
 plt.ylabel("Counts")
-plt.title("Number of times each Washer is used")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-
-st.write("""
-## - Number of times each Dryer is used
-""")
-
-grouped = df.groupby('Dryer_No').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['Dryer_No'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("Dryer_No")
-plt.ylabel("Counts")
-plt.title("Number of times each Dryer is used")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-st.write("""
-## - Number of times each race visited the shop
-""")
-
-grouped = df.groupby('Race').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['Race'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("Race")
-plt.ylabel("Counts")
-plt.title("Number of times each race visited the shop")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-st.write("""
-## - Number of times each basket size was used
-""")
-
-grouped = df.groupby('Basket_Size').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['Basket_Size'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("Basket_Size")
-plt.ylabel("Counts")
-plt.title("Number of times each basket size was used")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-st.write("""
-## - Number of times each gender visited the shop
-""")
-
-grouped = df.groupby('Gender').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['Gender'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("Gender")
-plt.ylabel("Counts")
-plt.title("Number of times each gender visited the shop")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-st.write("""
-## - Number of times each Body_Size visited the shop
-""")
-
-grouped = df.groupby('Body_Size').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['Body_Size'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("Body_Size")
-plt.ylabel("Counts")
-plt.title("Number of times each Body_Size visited the shop")
-plt.xticks(rotation=90)
-st.pyplot(fig=plt)
-
-st.write("""
-## - Number of times each customers with or without kids visited the shop
-""")
-
-grouped = df.groupby('With_Kids').size().reset_index(name= 'frequency')
-
-fig = plt.figure()
-
-ax = fig.add_axes([0,0,1,1])
-x = grouped['With_Kids'].astype(str)
-y = grouped['frequency']
-ax.bar(x,y)
-plt.xlabel("With_Kids")
-plt.ylabel("Counts")
-plt.title("Number of times each customers with or without kids visited the shop")
+plt.title("Number of times each selected option is used")
 plt.xticks(rotation=90)
 st.pyplot(fig=plt)
 
@@ -273,56 +168,54 @@ st.dataframe(df)
 st.markdown(
     """
 ### Classification Models Result
-
 | Classifier | Score |
 | --- | --- |
 | KNeighborsClassifier | 0.252 |
 | Naive Bayes | 0.287 |
 """)
 
-st.write("""
-## - Predict customer's basket size
-### Using all features
-""")
-st.markdown(
+option = st.selectbox("Select models", ['All features', 'Selected Features'])
+
+if option == 'All features':
+    img = Image.open("images/BasketSizeROC1.png")
+    st.image(img)
+    st.markdown(
     """
-### Classification Models Result For Basket Size
-
-| Classifier | Accurancy | AUC | Precision |
-| --- | --- |
-| KNeighborsClassifier | 0.851 | 0.90 | 0.81 |
-| Naive Bayes | 0.733 | 0.84 | 0.80 |
-| Random Forest | 0.944 | 0.99 | 0.96 |
-| Logistic Regression | 0.770 | 0.82 | 0.80 |
-
-""")
-st.markdown("""
-### ROC curve on all features 
-""")
-imgROC1 = Image.open("images/BasketSizeROC1.png")
-st.image(imgROC1)
-
-st.write("""
-### Using selected features (Basket_Size, Basket_colour, Attire, Shirt_Colour, Pants_Colour, Humidity, Wind Speed, Condition)
-""")
-st.markdown(
+    ### Classification Models Result For Basket Size
+    | Classifier | Accurancy | AUC | Precision |
+    | --- | --- |
+    | KNeighborsClassifier | 0.851 | 0.90 | 0.81 |
+    | Naive Bayes | 0.733 | 0.84 | 0.80 |
+    | Random Forest | 0.944 | 0.99 | 0.96 |
+    | Logistic Regression | 0.770 | 0.82 | 0.80 |
+     """)
+    st.write("""### Using all features""")
+else:
+    img = Image.open("images/BasketSizeROC2.png")
+    st.image(img)
+    st.markdown(
     """
-### Classification Models Result For Basket Size
+    ### Classification Models Result For Basket Size
+    | Classifier | Accurancy | AUC | Precision |
+    | --- | --- |
+    | KNeighborsClassifier | 0.95 | 0.90 | 0.86 |
+    | Naive Bayes | 0.740 | 0.78 | 0.80 |
+    | Random Forest | 0.934 | 0.98 | 0.95 |
+    | Logistic Regression | 0.710 | 0.74 | 0.77 |
+    """)
+    st.write("""
+    ### Using selected features (Basket_Size, Basket_colour, Attire, Shirt_Colour, Pants_Colour, Humidity, Wind Speed, Condition)
+    """)
 
-| Classifier | Accurancy | AUC | Precision |
-| --- | --- |
-| KNeighborsClassifier | 0.95 | 0.90 | 0.86 |
-| Naive Bayes | 0.740 | 0.78 | 0.80 |
-| Random Forest | 0.934 | 0.98 | 0.95 |
-| Logistic Regression | 0.710 | 0.74 | 0.77 |
-
+st.markdown(
+"""
+### 
+The motivation for classifying basket size is to predict customer's variables or even weather variables to increase business revenue. A big basket might require
+using the washing machine and dryer twice. We do found out that KNN model gives best overall accurancy and lower error compare to the other models.
+Furthermore, by using chi square test and cramer's V statistic, we have also found out that these features : Basket_Size, Basket_colour, Attire, Shirt_Colour, Pants_Colour, Humidity, Wind Speed, Condition
+ increase the accurancy of our model or get almost same results.
 """)
 
-st.markdown("""
-### ROC curve on selected features 
-""")
-imgROC2 = Image.open("images/BasketSizeROC2.png")
-st.image(imgROC2)
 
 
 
